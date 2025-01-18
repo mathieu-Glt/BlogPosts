@@ -35,8 +35,16 @@ class AuthController extends Controller
             'password' => 'required|min:6',
         ]);
 
+
+
         if (Auth::attempt($credentials)) {
-            return redirect()->route('home')->with('success', 'Connexion réussie!');
+            // Log the user information
+            \Log::info('User logged in:', [
+                'id' => Auth::user()->id,
+                'name' => Auth::user()->name,
+                'email' => Auth::user()->email,
+            ]);
+            return redirect()->route('home')->with('success', 'Connexion réussie! Bienvenue ' . Auth::user()->name);
         }
 
         return back()->withErrors([
@@ -62,11 +70,15 @@ class AuthController extends Controller
      */
     public function register(Request $request)
     {
+        // \Log::info('Password:', ['password' => $request->password]);
+        // \Log::info('Password Confirmation:', ['password_confirmation' => $request->password_confirmation]);
+
         $validated = $request->validate([
             'firstname' => 'required|max:255',
             'lastname' => 'required|max:255',
+            'name' => 'required|max:255',
             'email' => 'required|email|unique:users,email',
-            'phone' => 'nullable|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:15',
+            'phone' => 'nullable|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
             'password' => 'required|min:6|confirmed',
         ]);
 
@@ -74,6 +86,7 @@ class AuthController extends Controller
         $user = User::create([
             'firstname' => $validated['firstname'],
             'lastname' => $validated['lastname'],
+            'name' => $validated['name'],
             'email' => $validated['email'],
             'phone' => $validated['phone'],
             'password' => Hash::make($validated['password']),

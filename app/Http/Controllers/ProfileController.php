@@ -26,9 +26,10 @@ class ProfileController extends Controller
     public function update(Request $request)
     {
         // Validation des données
-        $request->validate([
+        $validated = $request->validate([
             'firstname' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
+            'name' => 'required|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . Auth::id(),
             'phone' => 'nullable|string|max:20',
         ]);
@@ -37,11 +38,13 @@ class ProfileController extends Controller
         $user = Auth::user();
 
         // Met à jour les informations de l'utilisateur
+
         $user->update([
-            'firstname' => $request->firstname,
-            'lastname' => $request->lastname,
-            'email' => $request->email,
-            'phone' => $request->phone,
+            'firstname' => $validated['firstname'],
+            'lastname' => $validated['lastname'],
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'phone' => $validated['phone'],
         ]);
 
         // Redirige l'utilisateur vers la page de modification du profil avec un message de succès

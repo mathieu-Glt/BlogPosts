@@ -16,8 +16,23 @@
                 <div class="space-x-4">
                     <a href="{{ route('articles.index') }}" class="text-gray-700 hover:text-gray-900">Articles</a>
                     <a href="{{ route('categories.index') }}" class="text-gray-700 hover:text-gray-900">Catégories</a>
-                    <a href="{{ route('login') }}" class="text-gray-700 hover:text-gray-900">Se connecter</a>
-                    <a href="{{ route('register') }}" class="text-gray-700 hover:text-gray-900">Créer un compte</a>
+
+                    @guest
+                        <a href="{{ route('login') }}" class="text-gray-700 hover:text-gray-900">Se connecter</a>
+                        <a href="{{ route('register') }}" class="text-gray-700 hover:text-gray-900">Créer un compte</a>
+                    @endguest
+                    @auth
+                        <a href="{{ route('profile.edit') }}" class="text-gray-700 hover:text-gray-900">Modifier compte
+                            utilisateur</a>
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    @endauth
                 </div>
             </div>
         </div>

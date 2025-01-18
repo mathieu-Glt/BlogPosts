@@ -15,7 +15,7 @@
                 </div>
 
                 <div class="card-body px-4 py-3">
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ route('login.post') }}">
                         @csrf
 
                         <!-- Email Input -->

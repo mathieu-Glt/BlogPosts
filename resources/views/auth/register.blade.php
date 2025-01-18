@@ -11,10 +11,10 @@
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
-                        <!-- Prénom -->
+                        <!-- firstname -->
                         <div class="mb-3">
                             <label for="firstname" class="form-label">{{ __('Prénom') }}</label>
-                            <input id="firstname" type="text"
+                            <input id="firstname" type="text" name="firstname" placeholder="firstname"
                                 class="form-control @error('firstname') is-invalid @enderror" name="firstname"
                                 value="{{ old('firstname') }}" required autocomplete="firstname" autofocus>
                             @error('firstname')
@@ -24,27 +24,38 @@
                             @enderror
                         </div>
 
-                        <!-- Nom -->
+                        <!-- lastname -->
                         <div class="mb-3">
                             <label for="lastname" class="form-label">{{ __('Nom') }}</label>
-                            <input id="lastname" type="text"
+                            <input id="lastname" type="text" name="lastname" placeholder="lastname"
                                 class="form-control @error('lastname') is-invalid @enderror" name="lastname"
                                 value="{{ old('lastname') }}" required autocomplete="lastname">
                             @error('lastname')
                                 <div class="invalid-feedback">
-                                    <strong>{{ $message }}</strong>
                                 </div>
                             @enderror
                         </div>
 
-                        <!-- Téléphone -->
+                        <!-- Nom -->
+                        <div class="mb-3">
+                            <label for="name" class="form-label">{{ __('Nom') }}</label>
+                            <input id="name" type="text" name="name" placeholder="name"
+                                class="form-control @error('name') is-invalid @enderror" name="name"
+                                value="{{ old('name') }}" required autocomplete="name">
+                            @error('name')
+                                <div class="invalid-feedback">
+                                </div>
+                            @enderror
+                        </div>
+
+                        <!-- Phone -->
                         <div class="mb-3">
                             <label for="phone" class="form-label">{{ __('Téléphone') }}</label>
-                            <input id="phone" type="tel" class="form-control @error('phone') is-invalid @enderror"
-                                name="phone" value="{{ old('phone') }}" autocomplete="tel">
+                            <input id="phone" type="tel" name="phone" placeholder="0112103246"
+                                class="form-control @error('phone') is-invalid @enderror" name="phone"
+                                value="{{ old('phone') }}" autocomplete="tel">
                             @error('phone')
                                 <div class="invalid-feedback">
-                                    <strong>{{ $message }}</strong>
                                 </div>
                             @enderror
                         </div>
@@ -52,8 +63,9 @@
                         <!-- Email -->
                         <div class="mb-3">
                             <label for="email" class="form-label">{{ __('Email') }}</label>
-                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                                name="email" value="{{ old('email') }}" required autocomplete="email">
+                            <input id="email" type="email" name="email" placeholder="test@test.com"
+                                class="form-control @error('email') is-invalid @enderror" name="email"
+                                value="{{ old('email') }}" required autocomplete="email">
                             @error('email')
                                 <div class="invalid-feedback">
                                     <strong>{{ $message }}</strong>
@@ -64,7 +76,7 @@
                         <!-- Mot de passe -->
                         <div class="mb-3">
                             <label for="password" class="form-label">{{ __('Mot de passe') }}</label>
-                            <input id="password" type="password"
+                            <input id="password" type="password" name="password" placeholder="password"
                                 class="form-control @error('password') is-invalid @enderror" name="password" required
                                 autocomplete="new-password">
                             @error('password')
@@ -78,8 +90,8 @@
                         <div class="mb-3">
                             <label for="password-confirm"
                                 class="form-label">{{ __('Confirmer le mot de passe') }}</label>
-                            <input id="password-confirm" type="password" class="form-control"
-                                name="password_confirmation" required autocomplete="new-password">
+                            <input id="password-confirm" placeholder="password-confirm" type="password-confirm"
+                                class="form-control" name="password_confirmation" required autocomplete="new-password">
                         </div>
 
                         <!-- Bouton de soumission -->

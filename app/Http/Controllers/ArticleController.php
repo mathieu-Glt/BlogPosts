@@ -37,18 +37,13 @@ class ArticleController extends Controller
         return view('articles.show', compact('article'));
     }
 
-    // public function create()
-    // {
-    //     return view('articles.create');
-    // }
 
 
     public function create()
     {
-        $articles = Article::all();
-        return view('articles.create', compact('articles'));
+        $categories = Category::all();
+        return view('articles.create', compact('categories'));
     }
-
     public function store(Request $request)
     {
         $validated = $request->validate([
